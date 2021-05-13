@@ -5,7 +5,8 @@ const config = {
       {
         useBuiltIns: "usage",
         corejs: { version: 3 },
-        targets: "> 2%, not dead, not ie 11",
+        targets:
+          "last 2 Chrome versions, last 2 Firefox versions, last 2 Opera versions",
         debug: false,
         shippedProposals: true,
       },

@@ -5,30 +5,14 @@ const FilemanagerPlugin = require("filemanager-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const ExtensionReloader = require("webpack-extension-reloader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WextManifestWebpackPlugin = require("wext-manifest-webpack-plugin");
 
-const SOURCE_PATH = join(__dirname, "src");
-const PUBLIC_PATH = join(SOURCE_PATH, "public");
-const OUTPUT_PATH = join(__dirname, "extension");
-
-const isDev = env.NODE_ENV === "development";
 const targetBrowser = process.env.TARGET_BROWSER;
 
-const extensionReloaderPlugin = isDev
-  ? new ExtensionReloader({
-      port: 9090,
-      reloadPage: true,
-      entries: {
-        contentScript: "contentScript",
-        background: "background",
-        extensionPage: ["popup", "options"],
-      },
-    })
-  : () => {
-      this.apply = () => {};
-    };
+const SOURCE_PATH = join(__dirname, "src");
+const PUBLIC_PATH = join(SOURCE_PATH, "public");
+const OUTPUT_PATH = join(__dirname, "build");
 
 const getExtensionFileType = (browser) => {
   if (browser === "opera") {
@@ -51,7 +35,8 @@ module.exports = {
     errors: true,
     hash: true,
   },
-  mode: isDev ? "development" : "production",
+  mode:  "production",
+  stats: "errors-only",
   entry: {
     manifest: join(PUBLIC_PATH, "manifest.json"),
     background: join(SOURCE_PATH, "background", "index.ts"),
@@ -92,7 +77,7 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+           MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
           "sass-loader",
@@ -109,7 +94,7 @@ module.exports = {
       filename: "options.html",
       template: join(PUBLIC_PATH, "options.html"),
       inject: "body",
-      scriptLoading: 'defer',
+      scriptLoading: "defer",
       chunks: ["options"],
       hash: true,
       minify: true,
@@ -118,7 +103,7 @@ module.exports = {
       filename: "newTab.html",
       template: join(PUBLIC_PATH, "newTab.html"),
       inject: "body",
-      scriptLoading: 'defer',
+      scriptLoading: "defer",
       chunks: ["newTab"],
       hash: true,
       minify: true,
@@ -127,7 +112,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [{ from: join(PUBLIC_PATH, "icons"), to: "public/icons" }],
     }),
-    extensionReloaderPlugin,
+    new webpack.SourceMapDevToolPlugin({ filename: false }),
   ],
   optimization: {
     minimize: true,

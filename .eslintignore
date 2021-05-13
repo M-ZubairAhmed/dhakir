@@ -1,10 +1,9 @@
 # Ignore Eslint for following directories
 
-node_modules
-dist
-build
-extension
-.github
+node_modules/
+dist/
+build/
+.github/
 
 # Config files
 babel.config.js

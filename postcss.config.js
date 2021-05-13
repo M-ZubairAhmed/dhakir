@@ -3,12 +3,14 @@ const postcssPresetEnv = require("postcss-preset-env");
 module.exports = {
   map: false,
   plugins: [
+    "cssnano",
     "tailwindcss",
     "autoprefixer",
     "postcss-import",
     postcssPresetEnv({
-      stage: 1,
-      browsers: "> 2%, not dead, not ie 11",
+      stage: 2,
+      browsers:
+        "last 2 Chrome versions, last 2 Firefox versions, last 2 Opera versions",
     }),
   ],
 };
