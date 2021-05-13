@@ -1,0 +1,58 @@
+{
+  "manifest_version": 2,
+  "name": "Dhakir",
+  "short_name": "Dhakir",
+  "description": "Browser extension which reminds you to do dhirk on every new tab",
+  "version": "0.0.0",
+  "icons": {
+    "16": "public/icons/favicon-16.png",
+    "32": "public/icons/favicon-32.png",
+    "48": "public/icons/favicon-48.png",
+    "128": "public/icons/favicon-128.png"
+  },
+  "homepage_url": "https://dhakir.cyou",
+  "permissions": ["storage", "http://*/*", "https://*/*"],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "__chrome|firefox__author": "m-zubairahmed",
+  "__opera__developer": {
+    "name": "m-zubairahmed"
+  },
+  "__firefox__applications": {
+    "gecko": {
+      "id": "help@dhakir.cyou",
+      "strict_min_version": "42.0"
+    }
+  },
+  "__chrome__minimum_chrome_version": "49",
+  "__opera__minimum_opera_version": "36",
+  "chrome_url_overrides": {
+    "newtab": "newTab.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "public/icons/favicon-16.png",
+      "32": "public/icons/favicon-32.png",
+      "48": "public/icons/favicon-48.png",
+      "128": "public/icons/favicon-128.png"
+    },
+    "default_title": "Dhakir",
+    "__chrome|opera__chrome_style": false,
+    "__firefox__browser_style": false
+  },
+  "__chrome|opera__options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "__chrome__chrome_style": false
+  },
+  "background": {
+    "scripts": ["js/background.bundle.js"],
+    "__chrome|opera__persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["js/contentScript.bundle.js"]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "jest",
+    "testing-library",
+    "jest-dom",
+    "prettier"
+  ],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": "webpack",
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "env": {
+    "jest": true
+  },
+  "rules": {
+    "react/prop-types": 0,
+    "prettier/prettier": "error"
+  },
+  "overrides": []
+}

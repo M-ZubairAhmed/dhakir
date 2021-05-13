@@ -1,0 +1,16 @@
+# Ignore Eslint for following directories
+
+node_modules
+dist
+build
+extension
+.github
+
+# Config files
+babel.config.js
+webpack.config.js
+postcss.config.js
+tailwind.config.js
+jest.config.js
+jamsime.setup.js
+jasmine.json
